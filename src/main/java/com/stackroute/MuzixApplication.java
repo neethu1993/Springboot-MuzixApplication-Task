@@ -21,11 +21,13 @@ public class MuzixApplication implements ApplicationListener<ContextRefreshedEve
 		SpringApplication.run(MuzixApplication.class, args);
 	}
 
+	//Overriden ApplicationListener method
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 		muzixRepository.save(new Muzix(1,"Broken Angel","Arash"));
 	}
 
+	//Overriden CommandLineRunner method
 	@Override
 	public void run(String... args) throws Exception {
 		muzixRepository.save(new Muzix(2,"One day","Arash"));

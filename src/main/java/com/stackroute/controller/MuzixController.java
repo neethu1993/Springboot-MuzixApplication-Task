@@ -73,6 +73,8 @@ public class MuzixController {
         }
         return responseEntity;
     }
+
+    //Mehtod to track by name
     @GetMapping("muzixname/{trackName}")
     public ResponseEntity<?> getByName(@PathVariable String trackName){
         return new ResponseEntity<List<Muzix>>(muzixService.trackByTrackName(trackName),HttpStatus.OK);

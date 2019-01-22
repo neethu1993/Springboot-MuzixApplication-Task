@@ -1,5 +1,5 @@
 /**
- * Configuration with h2 database
+ * Configuration with h2 database and used swagger2
  */
 package com.stackroute.config;
 

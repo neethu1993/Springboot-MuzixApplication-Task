@@ -1,5 +1,5 @@
 /**
- * Muzix Application domain class
+ * Muzix Application domain class and used lombok annotations to reduce the number of codes
  */
 package com.stackroute.domain;
 

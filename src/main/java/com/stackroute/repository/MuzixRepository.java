@@ -12,6 +12,8 @@ import java.util.List;
 
 @Repository
 public interface MuzixRepository extends JpaRepository<Muzix,Integer> {
+
+    //Query to track by name of track
     @Query("SELECT m FROM Muzix m WHERE m.trackName=?1")
     public List<Muzix> findByTrackName(String trackName);
 }
