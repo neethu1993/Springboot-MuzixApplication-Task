@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Entity //declares the class as a table
+@Data //contains data to create getters and setters
+@NoArgsConstructor //to create a default constructor
+@AllArgsConstructor //to create a parametrized consrtuctor
+@Builder // to create an instance of current class
 public class Muzix {
 
     //Variables

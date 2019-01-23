@@ -1,5 +1,5 @@
 /**
- * Custom Exception created here
+ * Custom Exception  for muzix already exists exception created here
  */
 package com.stackroute.exceptions;
 
@@ -8,7 +8,7 @@ public class MuzixAlreadyExistsException extends Exception {
     //Message variable
     private String message;
 
-    //Empty Constructor
+    //Default Constructor
     public MuzixAlreadyExistsException() {
     }
 

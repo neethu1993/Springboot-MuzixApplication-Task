@@ -16,9 +16,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.List;
 
-@RestController
+@RestController //used to enable @Controller, and  @Responsebody
 @RequestMapping(value="api/v1")
-@Api(value="onlinestore", description="Operations pertaining to products in Online Store")
+@Api(value="Musicstore", description="Operations pertaining to tracks")
 public class MuzixController extends ResponseEntityExceptionHandler {
 
     //A variable of type MuzixService
@@ -51,8 +51,8 @@ public class MuzixController extends ResponseEntityExceptionHandler {
     }
 
     //Method to perform DELETE operation
-    @DeleteMapping("muzix")
-    public ResponseEntity<?> deleteMuzix(@RequestParam int trackId) throws MuzixNotFoundException{
+    @DeleteMapping("muzix/{trackId}")
+    public ResponseEntity<?> deleteMuzix(@PathVariable int trackId) throws MuzixNotFoundException{
         muzixService.removeMuzix(trackId);
         return new ResponseEntity<String>("Successfully Deleted", HttpStatus.CREATED);
     }

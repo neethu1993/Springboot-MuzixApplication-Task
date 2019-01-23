@@ -16,8 +16,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.env.Environment;
 
-@ComponentScan
-@SpringBootApplication
+@SpringBootApplication //used to enable @EnableAutoConfiguration, @ComponentScan, @Configuration
 
 //property source path to application properties
 @PropertySource("classpath:object.properties")
@@ -33,9 +32,9 @@ public class MuzixApplication implements /*ApplicationListener<ContextRefreshedE
 	@Value("${comment}")
 	private String comment;
 
-	//An environment variable is created to get the values from application.properties
-	@Autowired
-	Environment env;
+//	//An environment variable is created to get the values from application.properties
+//	@Autowired
+//	Environment env;
 
 	@Autowired
 	MuzixRepository muzixRepository;
