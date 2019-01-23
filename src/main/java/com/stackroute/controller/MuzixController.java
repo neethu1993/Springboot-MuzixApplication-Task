@@ -57,6 +57,7 @@ public class MuzixController extends ResponseEntityExceptionHandler {
         return new ResponseEntity<String>("Successfully Deleted", HttpStatus.ACCEPTED);
     }
 
+    //Method to trackby id
     @GetMapping("muzix/{trackId}")
     public ResponseEntity<?> getById(@PathVariable int trackId) throws MuzixNotFoundException {
         return new ResponseEntity (muzixService.trackByTrackId(trackId), HttpStatus.OK);
