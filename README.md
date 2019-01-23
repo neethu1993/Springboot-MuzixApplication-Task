@@ -1,12 +1,20 @@
 # Springboot-MuzixApplication-Task
- Application should allow all the users to perform the
-following activities:
-a.
-Save track information such as trackId,
-trackName, comments of the track.
-b.
-Display saved track.
-c.
- Update comments of saved track.
-d.
-Remove track
+Tasks to be Done Post Demo
+1. Complete all the endpoints for CRUD operations on Muzix
+2. Use h2-console to view in-memory data
+3. Add an endpoint to search trackByName. Understand @Query and parameter passing to
+@Query
+4. Generate API documentation using Swagger 2
+5. Create custom exceptions TrackNotFoundException, TrackAlreadyExistsException in a
+com.stack....exceptions package. Perform appropriate exception handling and propagation
+Back.
+6. Running Logic on Startup in Spring. Create seed data to pre-fill the database with track
+information whenever the application starts. Use both approaches:
+Approach 1: ApplicationListener<ContextRefreshedEvent>
+Approach 2: CommandLineRunner (Find out how it differs from ApplicationRunner)
+7.Global exception using Controller advice
+8.Remove all hard coded data from the application code to application.properties
+a)by using @Value.
+b)by using @PropertySource
+c)by using Environment
+9) Add @Lombok
