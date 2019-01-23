@@ -20,7 +20,7 @@ import org.springframework.core.env.Environment;
 @SpringBootApplication
 
 //property source path to application properties
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:object.properties")
 public class MuzixApplication implements /*ApplicationListener<ContextRefreshedEvent>,*/ CommandLineRunner {
 
 	//@value annotations are used to get the values from application.properties
