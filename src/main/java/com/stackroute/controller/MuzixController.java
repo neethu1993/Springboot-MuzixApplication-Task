@@ -12,13 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value="api/v1")
 @Api(value="onlinestore", description="Operations pertaining to products in Online Store")
-public class MuzixController {
+public class MuzixController extends ResponseEntityExceptionHandler {
 
     //A variable of type MuzixService
     MuzixService muzixService;
@@ -31,52 +32,35 @@ public class MuzixController {
 
     //Method to perform POST operation
     @PostMapping("muzix")
-    public ResponseEntity<?> saveMuzix(@RequestBody Muzix muzix){
-        ResponseEntity responseEntity;
-        try{
-            muzixService.saveMuzix(muzix);
-            responseEntity=new ResponseEntity<String>("Successfully Created", HttpStatus.CREATED);
-        }catch(MuzixAlreadyExistsException ex){
-            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
-        }
-        return responseEntity;
+    public ResponseEntity<?> saveMuzix(@RequestBody Muzix muzix) throws MuzixAlreadyExistsException{
+        muzixService.saveMuzix(muzix);
+        return new ResponseEntity<String>("Successfully Created", HttpStatus.CREATED);
     }
 
     //Method to perform GET operation
     @GetMapping("muzix")
-    public ResponseEntity<?> getAllMuzixs(){
-        return new ResponseEntity<List<Muzix>>(muzixService.getAllMuzixs(),HttpStatus.OK);
+    public ResponseEntity<?> getAllMuzixs() {
+        return new ResponseEntity<List<Muzix>>(muzixService.getAllMuzixs(), HttpStatus.OK);
     }
 
     //Method to perform PUT operation
     @PutMapping("muzix")
-    public ResponseEntity<?> updateMuzix(@RequestBody Muzix muzix){
-        ResponseEntity responseEntity;
-        try{
-            muzixService.updateMuzix(muzix);
-            responseEntity=new ResponseEntity<String>("Successfully updated", HttpStatus.CREATED);
-        }catch(MuzixAlreadyExistsException ex){
-            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
-        }
-        return responseEntity;
+    public ResponseEntity<?> updateMuzix(@RequestBody Muzix muzix) throws MuzixAlreadyExistsException{
+        muzixService.updateMuzix(muzix);
+        return new ResponseEntity<String>("Successfully updated", HttpStatus.CREATED);
     }
 
     //Method to perform DELETE operation
     @DeleteMapping("muzix")
-    public ResponseEntity<?> deleteMuzix(@RequestParam int trackId){
-        ResponseEntity responseEntity;
-        try{
-            muzixService.removeMuzix(trackId);
-            responseEntity=new ResponseEntity<String>("Successfully Deleted", HttpStatus.CREATED);
-        }catch(MuzixNotFoundException ex){
-            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
-        }
-        return responseEntity;
+    public ResponseEntity<?> deleteMuzix(@RequestParam int trackId) throws MuzixNotFoundException{
+        muzixService.removeMuzix(trackId);
+        return new ResponseEntity<String>("Successfully Deleted", HttpStatus.CREATED);
     }
 
     //Mehtod to track by name
     @GetMapping("muzixname/{trackName}")
-    public ResponseEntity<?> getByName(@PathVariable String trackName){
-        return new ResponseEntity<List<Muzix>>(muzixService.trackByTrackName(trackName),HttpStatus.OK);
+    public ResponseEntity<?> getByName(@PathVariable String trackName) throws MuzixNotFoundException {
+        return new ResponseEntity<List<Muzix>>(muzixService.trackByTrackName(trackName), HttpStatus.OK);
     }
+
 }

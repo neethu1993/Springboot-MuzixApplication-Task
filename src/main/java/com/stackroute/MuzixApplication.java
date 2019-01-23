@@ -21,7 +21,7 @@ import org.springframework.core.env.Environment;
 
 //property source path to application properties
 @PropertySource("classpath:application.properties")
-public class MuzixApplication implements ApplicationListener<ContextRefreshedEvent>, CommandLineRunner {
+public class MuzixApplication implements /*ApplicationListener<ContextRefreshedEvent>,*/ CommandLineRunner {
 
 	//@value annotations are used to get the values from application.properties
 	@Value("${trackId}")
@@ -44,10 +44,10 @@ public class MuzixApplication implements ApplicationListener<ContextRefreshedEve
 	}
 
 	//Overriden ApplicationListener method
-	@Override
-	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-		muzixRepository.save(new Muzix(Integer.parseInt(env.getProperty("trackId")),env.getProperty("trackName"),env.getProperty("comment")));
-	}
+//	@Override
+//	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+//		muzixRepository.save(new Muzix(Integer.parseInt(env.getProperty("trackId")),env.getProperty("trackName"),env.getProperty("comment")));
+//	}
 
 	//Overriden CommandLineRunner method
 	@Override

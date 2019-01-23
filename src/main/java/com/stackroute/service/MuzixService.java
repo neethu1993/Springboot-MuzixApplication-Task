@@ -14,5 +14,5 @@ public interface MuzixService {
     public List<Muzix> getAllMuzixs();
     public Muzix updateMuzix(Muzix muzix)throws MuzixAlreadyExistsException;
     public Muzix removeMuzix(int trackId) throws MuzixNotFoundException;
-    public List<Muzix> trackByTrackName(String trackName);
+    public List<Muzix> trackByTrackName(String trackName)throws MuzixNotFoundException;
 }
