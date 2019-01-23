@@ -18,7 +18,7 @@ public class GlobalExceptionController {
     //Exception handler to handle Muzix not found exceptions
     @ExceptionHandler(MuzixNotFoundException.class)
     public ResponseEntity handleMuzixNotFoundException(final MuzixNotFoundException e) {
-        return new ResponseEntity(e.getMessage(),HttpStatus.CONFLICT);
+        return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
     }
 
     //Exception handler to handle Muzix already exists exceptions

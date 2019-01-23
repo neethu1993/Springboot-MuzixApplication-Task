@@ -39,7 +39,7 @@ public class MuzixController extends ResponseEntityExceptionHandler {
 
     //Method to perform GET operation
     @GetMapping("muzix")
-    public ResponseEntity<?> getAllMuzixs() {
+    public ResponseEntity<?> getAllMuzixs() throws MuzixNotFoundException {
         return new ResponseEntity<List<Muzix>>(muzixService.getAllMuzixs(), HttpStatus.OK);
     }
 
@@ -57,11 +57,12 @@ public class MuzixController extends ResponseEntityExceptionHandler {
         return new ResponseEntity<String>("Successfully Deleted", HttpStatus.FOUND);
     }
 
+    //Method to track by id
     @GetMapping("muzix/{trackId}")
     public ResponseEntity<?> getById(@PathVariable int trackId) throws MuzixNotFoundException {
         return new ResponseEntity (muzixService.trackByTrackId(trackId), HttpStatus.OK);
     }
-    //Mehtod to track by name
+    //Method to track by name
     @GetMapping("muzixs/{trackName}")
     public ResponseEntity<?> getByName(@PathVariable String trackName) throws MuzixNotFoundException {
         return new ResponseEntity<List<Muzix>>(muzixService.trackByTrackName(trackName), HttpStatus.OK);

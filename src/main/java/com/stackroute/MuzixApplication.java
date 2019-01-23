@@ -10,17 +10,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.core.env.Environment;
-@ComponentScan
+
 @SpringBootApplication //used to enable @EnableAutoConfiguration, @ComponentScan, @Configuration
 
 //property source path to application properties
 @PropertySource("classpath:object.properties")
-public class MuzixApplication implements /*ApplicationListener<ContextRefreshedEvent>,*/ CommandLineRunner {
+public class MuzixApplication implements CommandLineRunner {
 
 	//@value annotations are used to get the values from application.properties
 	@Value("${trackId}")
@@ -32,21 +29,11 @@ public class MuzixApplication implements /*ApplicationListener<ContextRefreshedE
 	@Value("${comment}")
 	private String comment;
 
-//	//An environment variable is created to get the values from application.properties
-//	@Autowired
-//	Environment env;
-
 	@Autowired
 	MuzixRepository muzixRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(MuzixApplication.class, args);
 	}
-
-	//Overriden ApplicationListener method
-//	@Override
-//	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-//		muzixRepository.save(new Muzix(Integer.parseInt(env.getProperty("trackId")),env.getProperty("trackName"),env.getProperty("comment")));
-//	}
 
 	//Overriden CommandLineRunner method
 	@Override
