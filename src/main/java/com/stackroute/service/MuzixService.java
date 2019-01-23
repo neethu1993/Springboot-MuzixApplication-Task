@@ -12,7 +12,8 @@ import java.util.List;
 public interface MuzixService {
     public Muzix saveMuzix(Muzix muzix)throws MuzixAlreadyExistsException;
     public List<Muzix> getAllMuzixs();
-    public Muzix updateMuzix(Muzix muzix)throws MuzixAlreadyExistsException;
+    public Muzix updateMuzix(int trackId,String comment)throws MuzixNotFoundException;
     public Muzix removeMuzix(int trackId) throws MuzixNotFoundException;
+    public Muzix trackByTrackId(int trackId) throws MuzixNotFoundException;
     public List<Muzix> trackByTrackName(String trackName)throws MuzixNotFoundException;
 }

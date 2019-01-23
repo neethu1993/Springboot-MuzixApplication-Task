@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.env.Environment;
-
+@ComponentScan
 @SpringBootApplication //used to enable @EnableAutoConfiguration, @ComponentScan, @Configuration
 
 //property source path to application properties
