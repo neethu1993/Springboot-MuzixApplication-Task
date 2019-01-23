@@ -39,7 +39,7 @@ public class MuzixController extends ResponseEntityExceptionHandler {
 
     //Method to perform GET operation
     @GetMapping("muzix")
-    public ResponseEntity<?> getAllMuzixs() {
+    public ResponseEntity<?> getAllMuzixs() throws MuzixNotFoundException {
         return new ResponseEntity<List<Muzix>>(muzixService.getAllMuzixs(), HttpStatus.OK);
     }
 
@@ -47,14 +47,14 @@ public class MuzixController extends ResponseEntityExceptionHandler {
     @PutMapping("muzix/{trackId}")
     public ResponseEntity<?> updateMuzix(@PathVariable int trackId,@RequestBody Muzix muzix) throws MuzixNotFoundException{
         muzixService.updateMuzix(trackId,muzix.getComment());
-        return new ResponseEntity<String>("Successfully updated", HttpStatus.CREATED);
+        return new ResponseEntity<String>("Successfully updated", HttpStatus.FOUND);
     }
 
     //Method to perform DELETE operation
     @DeleteMapping("muzix/{trackId}")
     public ResponseEntity<?> deleteMuzix(@PathVariable int trackId) throws MuzixNotFoundException{
         muzixService.removeMuzix(trackId);
-        return new ResponseEntity<String>("Successfully Deleted", HttpStatus.FOUND);
+        return new ResponseEntity<String>("Successfully Deleted", HttpStatus.ACCEPTED);
     }
 
     @GetMapping("muzix/{trackId}")

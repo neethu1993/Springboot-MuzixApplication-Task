@@ -7,11 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity //declares the class as a table
+@Document //declares the class as a document
 @Data //contains data to create getters and setters
 @NoArgsConstructor //to create a default constructor
 @AllArgsConstructor //to create a parametrized consrtuctor
