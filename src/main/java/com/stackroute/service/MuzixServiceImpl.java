@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MuzixServiceImpl implements MuzixService {
@@ -31,9 +32,6 @@ public class MuzixServiceImpl implements MuzixService {
                throw new MuzixAlreadyExistsException("Track already exists");
            }
            Muzix savedMuzix = muzixRepository.save(muzix);
-           if (savedMuzix == null){
-               throw new MuzixAlreadyExistsException("Track already exists");
-           }
            return savedMuzix;
     }
 
@@ -45,14 +43,15 @@ public class MuzixServiceImpl implements MuzixService {
 
     //Overriden method to update the muzix
     @Override
-    public Muzix updateMuzix(Muzix muzix) throws MuzixAlreadyExistsException {
-        if (muzixRepository.existsById(muzix.getTrackId())) {
-            throw new MuzixAlreadyExistsException("Track already exists");
+    public Muzix updateMuzix(int trackId,String comment) throws MuzixNotFoundException {
+
+        if (muzixRepository.findById(trackId).isEmpty()) {
+            throw new MuzixNotFoundException("Track not found to update");
         }
-        Muzix savedMuzix = muzixRepository.save(muzix);
-        if (savedMuzix == null) {
-            throw new MuzixAlreadyExistsException("Track already exists");
-        }
+        Optional<Muzix> muzix = muzixRepository.findById(trackId);
+        Muzix muzix1 = muzix.get();
+        muzix1.setComment(comment);
+        Muzix savedMuzix = muzixRepository.save(muzix1);
         return savedMuzix;
     }
     //Overriden method to remove the muzix
@@ -62,11 +61,18 @@ public class MuzixServiceImpl implements MuzixService {
             throw new MuzixNotFoundException("Track not found");
         }
         Muzix deletedMuzix = muzixRepository.getOne(trackId);
-        if (deletedMuzix==null) {
-            throw new MuzixNotFoundException("Track not found");
-        }
         muzixRepository.delete(deletedMuzix);
         return deletedMuzix;
+    }
+
+    @Override
+    public Muzix trackByTrackId(int trackId) throws MuzixNotFoundException {
+        if (muzixRepository.findById(trackId).isEmpty()) {
+            throw new MuzixNotFoundException("Track not found to update");
+        }
+        Optional<Muzix> muzix1 = muzixRepository.findById(trackId);
+        Muzix muzix = muzix1.get();
+        return muzix;
     }
 
     //Service implimentation to track by name

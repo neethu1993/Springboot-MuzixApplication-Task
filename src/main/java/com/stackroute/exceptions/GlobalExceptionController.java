@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalExceptionController {
     @ExceptionHandler(MuzixNotFoundException.class)
     public ResponseEntity handleMuzixNotFoundException(final MuzixNotFoundException e) {
-        return new ResponseEntity(e.getMessage(),HttpStatus.CONFLICT);
+        return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
     }
 
     //Exception handler to handle Muzix already exists exceptions

@@ -30,6 +30,7 @@ public class MuzixController extends ResponseEntityExceptionHandler {
         this.muzixService = muzixService;
     }
 
+
     //Method to perform POST operation
     @PostMapping("muzix")
     public ResponseEntity<?> saveMuzix(@RequestBody Muzix muzix) throws MuzixAlreadyExistsException{
@@ -39,28 +40,31 @@ public class MuzixController extends ResponseEntityExceptionHandler {
 
     //Method to perform GET operation
     @GetMapping("muzix")
-    public ResponseEntity<?> getAllMuzixs() {
+    public ResponseEntity<?> getAllMuzixs() throws MuzixNotFoundException {
         return new ResponseEntity<List<Muzix>>(muzixService.getAllMuzixs(), HttpStatus.OK);
     }
 
     //Method to perform PUT operation
-    @PutMapping("muzix")
-    public ResponseEntity<?> updateMuzix(@RequestBody Muzix muzix) throws MuzixAlreadyExistsException{
-        muzixService.updateMuzix(muzix);
-        return new ResponseEntity<String>("Successfully updated", HttpStatus.CREATED);
+    @PutMapping("muzix/{trackId}")
+    public ResponseEntity<?> updateMuzix(@PathVariable int trackId,@RequestBody Muzix muzix) throws MuzixNotFoundException{
+        muzixService.updateMuzix(trackId,muzix.getComment());
+        return new ResponseEntity<String>("Successfully updated", HttpStatus.FOUND);
     }
 
     //Method to perform DELETE operation
-    @DeleteMapping("muzix")
-    public ResponseEntity<?> deleteMuzix(@RequestParam int trackId) throws MuzixNotFoundException{
+    @DeleteMapping("muzix/{trackId}")
+    public ResponseEntity<?> deleteMuzix(@PathVariable int trackId) throws MuzixNotFoundException{
         muzixService.removeMuzix(trackId);
-        return new ResponseEntity<String>("Successfully Deleted", HttpStatus.CREATED);
+        return new ResponseEntity<String>("Successfully Deleted", HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("muzix/{trackId}")
+    public ResponseEntity<?> getById(@PathVariable int trackId) throws MuzixNotFoundException {
+        return new ResponseEntity (muzixService.trackByTrackId(trackId), HttpStatus.OK);
+    }
     //Mehtod to track by name
-    @GetMapping("muzixname/{trackName}")
+    @GetMapping("muzixs/{trackName}")
     public ResponseEntity<?> getByName(@PathVariable String trackName) throws MuzixNotFoundException {
         return new ResponseEntity<List<Muzix>>(muzixService.trackByTrackName(trackName), HttpStatus.OK);
     }
-
 }
