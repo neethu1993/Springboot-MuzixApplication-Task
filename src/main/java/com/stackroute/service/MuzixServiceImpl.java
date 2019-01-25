@@ -32,6 +32,9 @@ public class MuzixServiceImpl implements MuzixService {
                throw new MuzixAlreadyExistsException("Track already exists");
            }
            Muzix savedMuzix = muzixRepository.save(muzix);
+           if(savedMuzix==null){
+               throw new MuzixAlreadyExistsException("Track already exists");
+           }
            return savedMuzix;
     }
 
@@ -60,11 +63,12 @@ public class MuzixServiceImpl implements MuzixService {
 
     //Overriden method to remove the muzix
     @Override
-    public void removeMuzix(int trackId) throws MuzixNotFoundException{
+    public List<Muzix> removeMuzix(int trackId) throws MuzixNotFoundException{
         if(!muzixRepository.existsById(trackId)){
             throw new MuzixNotFoundException("Track not found");
         }
        muzixRepository.deleteById(trackId);
+        return muzixRepository.findAll();
     }
 
     //Overriden method to track by id
