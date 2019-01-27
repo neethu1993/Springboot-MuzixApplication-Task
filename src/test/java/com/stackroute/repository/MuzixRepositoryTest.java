@@ -13,7 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+//JUnit will invoke the class it references to run the tests in that class instead of the runner built into JUnit.
 @RunWith(SpringRunner.class)
+
+// Used when a test focuses only on MongoDB components.
 @DataMongoTest
 public class MuzixRepositoryTest {
     @Autowired
